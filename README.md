@@ -113,7 +113,7 @@ So, what are you waiting for? Go ahead and start customizing your action!
 1. Create a new branch
 
    ```bash
-   git checkout -b releases/v1
+   git checkout -b releases/v5
    ```
 
 1. Replace the contents of `src/` with your action code
@@ -124,7 +124,7 @@ So, what are you waiting for? Go ahead and start customizing your action!
    npm run all
    ```
 
-   > This step is important! It will run [`ncc`](https://github.com/vercel/ncc)
+   > This step is important! It will run [`esbuild`](https://github.com/evanw/esbuild)
    > to build the final JavaScript action code with all dependencies included.
    > If you do not run this step, your action will not work correctly when it is
    > used in a workflow. This step also includes the `--license` option for
@@ -141,11 +141,11 @@ So, what are you waiting for? Go ahead and start customizing your action!
 1. Push them to your repository
 
    ```bash
-   git push -u origin releases/v1
+   git push -u origin releases/v5
    ```
 
 1. Create a pull request and get feedback on your action
-1. Merge the pull request into the `main` branch
+1. Merge the pull request into the `dev` branch
 
 Your action is now published! :rocket:
 
@@ -198,7 +198,7 @@ steps:
 
   - name: Test Local Action
     id: test-action
-    uses: actions/typescript-action@v1 # Commit with the `v1` tag
+    uses: ./
     with:
       milliseconds: 1000
 
@@ -225,7 +225,7 @@ following steps:
    the previous step, and validates the format of the inputted tag (vX.X.X). The
    user is also reminded to update the version field in package.json.
 1. **Tagging the new release:** The script then tags a new release and syncs the
-   separate major tag (e.g. v1, v2) with the new release tag (e.g. v1.0.0,
+   separate major tag (e.g. v5, v2) with the new release tag (e.g. v5.0.0,
    v2.1.2). When the user is creating a new major release, the script
    auto-detects this and creates a `releases/v#` branch for the previous major
    version.

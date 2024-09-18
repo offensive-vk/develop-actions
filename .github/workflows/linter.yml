@@ -1,12 +1,12 @@
-name: Lint Codebase
+name: CI / Lint Codebase
 
 on:
   pull_request:
     branches:
-      - main
+      - dev
   push:
     branches:
-      - main
+      - dev
 
 permissions:
   contents: read
@@ -40,7 +40,7 @@ jobs:
         id: super-linter
         uses: super-linter/super-linter/slim@v7
         env:
-          DEFAULT_BRANCH: main
+          DEFAULT_BRANCH: dev
           FILTER_REGEX_EXCLUDE: dist/**/*
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
