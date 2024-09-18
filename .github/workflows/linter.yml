@@ -1,4 +1,4 @@
-name: CI / Lint Codebase
+name: CI / Lint
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint Codebase
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:

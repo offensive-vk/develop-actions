@@ -1,0 +1,5 @@
+services:
+  action-container:
+    build: .
+    container_name: Action_Dev_Container
+    tty: true
