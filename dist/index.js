@@ -18997,7 +18997,7 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 });
 
 // src/main.ts
-var core = __toESM(require_core());
+var core = __toESM(require_core(), 1);
 
 // src/wait.ts
 async function wait(milliseconds) {

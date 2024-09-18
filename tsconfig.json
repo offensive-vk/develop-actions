@@ -15,7 +15,7 @@
     "skipLibCheck": true,
     "newLine": "lf",
     "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "noEmit": true
   },
   "exclude": ["./dist", "./node_modules", "./__tests__", "./coverage"]
 }
