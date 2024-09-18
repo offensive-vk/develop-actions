@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   check-dist:
-    name: Check dist/
+    name: Check Distribution Directory
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +35,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-          cache: pnpm
 
       - name: Install Dependencies
         id: install
