@@ -38,7 +38,7 @@ jobs:
         run: npm run setup
 
       - name: Run Auto Fixer
-        run: npm run auto-fix
+        run: git config advice.mergeConflict false; npm run auto-fix
 
       - name: Create PR 
         id: create-pr
@@ -49,7 +49,7 @@ jobs:
           committer: "Hamster [bot] <TheHamsterBot@outlook.com>"
           commit-message: "Publish Linter Changes and Fixes"
           branch: "auto-fixer/linter"
-          assignee: "TheHamsterBot"
+          assignees: "TheHamsterBot"
           labels: |
             bot
             automated
