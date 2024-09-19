@@ -41,7 +41,7 @@ jobs:
         run: npm run auto-fix
 
       - name: Commit and Push
-        uses: offensive-vk/auto-commit-push@v5
+        uses: offensive-vk/auto-commit-push@master
         with:
           name: "Hamster [bot]"
           email: "TheHamsterBot@outlook.com"
