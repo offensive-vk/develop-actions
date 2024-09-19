@@ -14,7 +14,7 @@ permissions:
 jobs:
   test-typescript:
     runs-on: ubuntu-latest
-
+    name: TypeScript
     steps:
       - name: Checkout
         id: checkout
@@ -29,7 +29,7 @@ jobs:
 
       - name: Install Dependencies
         id: pnpm-ci
-        run: pnpm i
+        run: npm i -g pnpm@9.0.0; pnpm i
 
       - name: Check Format
         id: pnpm-format-check
@@ -45,7 +45,7 @@ jobs:
 
   test-action:
     runs-on: ubuntu-latest
-
+    name: Action
     steps:
       - name: Checkout
         id: checkout
