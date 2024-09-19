@@ -40,15 +40,46 @@ jobs:
       - name: Run Auto Fixer
         run: npm run auto-fix
 
-      - name: Commit and Push
-        uses: offensive-vk/auto-commit-push@master
+      - name: Create PR
+        id: create-pr
+        uses: peter-evans/create-pull-request@v7
         with:
-          name: "Hamster [bot]"
-          email: "TheHamsterBot@outlook.com"
-          message: "Publish Linter Changes and Fixes"
-          branch: ${{ github.head_ref }}
-          github-token: ${{ secrets.MY_TOKEN }}
-      
+          delete-branch: false
+          title: 'Automated: Auto Fix Linter'
+          committer: 'Hamster [bot] <TheHamsterBot@outlook.com>'
+          commit-message: 'Publish Linter Changes and Fixes'
+          branch: 'auto-fixer/linter'
+          assignees: 'TheHamsterBot'
+          labels: |
+            bot
+            automated
+            hamster
+          reviewers: offensive-vk
+          base: fix-actions
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          body: |
+            timestamp=$(date '+%b %d, %A %I:%M:%S %p')
+            markdown=$(cat <<EOF
+            ## This Pull Request Was Automated by [Hamster [bot]](https://github.com/TheHamsterBot)
+
+            > [!NOTE]
+            > Workflow Trigger: ${{ github.event_name }} event at ${{ github.event_path }}
+            > Details of Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            - Author: @TheHamsterBot
+            - Branch: ${{ github.event.base_ref }} (base) / ${{ github.event.head_ref }} (head)
+            - Commit: ${{ github.sha }}
+            - Workflow Path: ${{ github.workflow }}
+            - Pull Request Number: #${{ steps.create-pr.outputs.pr_number }}
+            - Pusher Details: ${{ github.event.pusher.name }} - ${{ github.event.pusher.email }}
+            - Commit Info: ${{ github.event.head_commit.message }}
+
+            ---
+
+            Thanks.
+            $timestamp
+            Your Hamster 🐹 <code>PF78VAPPKLZ2</code>
+            EOF)
   lint:
     name: Begin Linting
     runs-on: ubuntu-latest
