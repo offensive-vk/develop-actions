@@ -47,7 +47,7 @@ jobs:
           email: "TheHamsterBot@outlook.com"
           message: "Publish Linter Changes and Fixes"
           branch: ${{ github.head_ref }}
-          github-token: ${{ secrets.BOT_TOKEN }}
+          github-token: ${{ secrets.MY_TOKEN }}
       
   lint:
     name: Begin Linting
