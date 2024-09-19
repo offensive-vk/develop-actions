@@ -40,14 +40,17 @@ jobs:
       - name: Run Auto Fixer
         run: npm run auto-fix
 
-      - name: Commit and Push
-        uses: offensive-vk/auto-commit-push@master
+      - name: Commit and Create PR 
+        uses: peter-evans/create-pull-request@v7
         with:
-          name: "Hamster [bot]"
-          email: "TheHamsterBot@outlook.com"
-          message: "Publish Linter Changes and Fixes"
-          branch: ${{ github.head_ref }}
-          github-token: ${{ secrets.MY_TOKEN }}
+          delete-branch: false
+          title: "Automated: Auto Fix Linter"
+          committer: "Hamster [bot] <TheHamsterBot@outlook.com>"
+          commit-message: "Publish Linter Changes and Fixes"
+          branch: "auto-fixer/linter"
+          reviewers: offensive-vk
+          base: ${{ github.head_ref }}
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
       
   lint:
     name: Begin Linting
