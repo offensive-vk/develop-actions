@@ -31,7 +31,7 @@
     "coverage": "pnpx make-coverage-badge --output-path ./badges/coverage.svg",
     "format:write": "pnpx prettier --write .",
     "format:check": "pnpx prettier --check .",
-    "auto-fix": "pnpm run format:check && pnpm run format:write",
+    "auto-fix": "pnpm run format:write && pnpm run format:check",
     "lint": "pnpx eslint . -c ./.github/linters/eslint.config.js",
     "package": "pnpx esbuild src/index.ts --format=cjs --bundle --outfile=dist/index.cjs --platform=node --sourcemap && cp -f dist/index.cjs dist/index.js",
     "test": "pnpx jest",
