@@ -13,7 +13,7 @@ permissions:
   contents: write
   packages: read
   statuses: write
-  
+
 jobs:
   auto-fix:
     name: Auto Fix Linter Issues
