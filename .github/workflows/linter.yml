@@ -15,9 +15,35 @@ permissions:
   statuses: write
 
 jobs:
+  auto-fix:
+    name: Auto Fix Linter Issues
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install Dependencies
+        id: install
+        run: npm run setup
+
+      - name: Run Auto Fixer
+        run: npm run auto-fix
+
   lint:
     name: Begin Linting
     runs-on: ubuntu-latest
+    needs: [auto-fix]
     continue-on-error: true
     strategy:
       fail-fast: true
@@ -51,28 +77,4 @@ jobs:
           VALIDATE_JSCPD: false
           VALIDATE_TYPESCRIPT_STANDARD: false
 
-  auto-fix:
-    name: Auto Fix Linter Issues
-    runs-on: ubuntu-latest
-    needs: [lint]
-    strategy:
-      fail-fast: true
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-
-      - name: Install Dependencies
-        id: install
-        run: npx pnpm i
-
-      - name: Run Auto Fixer
-        run: npm run auto-fix
