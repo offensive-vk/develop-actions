@@ -19,7 +19,7 @@
     "setup"
   ],
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.cjs"
   },
   "scripts": {
     "bundle": "npm run format:write && npm run package",
@@ -27,8 +27,9 @@
     "coverage": "pnpx make-coverage-badge --output-path ./badges/coverage.svg",
     "format:write": "pnpx prettier --write .",
     "format:check": "pnpx prettier --check .",
+    "auto-fix": "pnpx run format:write",
     "lint": "pnpx eslint . -c ./.github/linters/eslint.config.js",
-    "package": "pnpx esbuild src/index.ts --bundle --outdir=dist --platform=node --sourcemap",
+    "package": "pnpx esbuild src/index.ts --bundle --outdir=dist --platform=node --sourcemap; mv /dist/index.js /dist/index.cjs",
     "package:watch": "npm run package -- --watch",
     "test": "pnpx jest",
     "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
