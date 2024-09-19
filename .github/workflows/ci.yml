@@ -15,7 +15,9 @@ permissions:
 jobs:
   test-typescript:
     runs-on: ubuntu-latest
-    name: TypeScript
+    name: Test TypeScript
+    strategy:
+      fail-fast: true
     steps:
       - name: Checkout
         id: checkout
@@ -41,12 +43,14 @@ jobs:
         run: pnpm run lint
 
       - name: Test
-        id: pnpm-ci-test
-        run: pnpm run ci-test
+        id: pnpm-test
+        run: pnpm run test
 
   test-action:
     runs-on: ubuntu-latest
-    name: Action
+    name: Test Action
+    strategy:
+      fail-fast: true
     steps:
       - name: Checkout
         id: checkout

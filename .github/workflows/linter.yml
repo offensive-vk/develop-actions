@@ -1,12 +1,13 @@
 name: CI / Lint
 
 on:
-  pull_request:
-    branches:
-      - dev
+  schedule:
+    - cron: '0 */4 * * *'
   push:
-    branches:
-      - dev
+    branches: ['dev', '**']
+  pull_request:
+    branches: ['dev', '**']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,6 +19,8 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     continue-on-error: true
+    strategy:
+      fail-fast: true
     steps:
       - name: Checkout
         id: checkout
@@ -47,11 +50,13 @@ jobs:
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JSCPD: false
           VALIDATE_TYPESCRIPT_STANDARD: false
-  
+
   auto-fix:
     name: Auto Fix Linter Issues
     runs-on: ubuntu-latest
     needs: [lint]
+    strategy:
+      fail-fast: true
     continue-on-error: true
     steps:
       - name: Checkout
@@ -59,5 +64,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install Dependencies
+        id: install
+        run: npx pnpm i
+
       - name: Run Auto Fixer
-        run: npx run auto-fix 
+        run: pnpm run auto-fix
