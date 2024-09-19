@@ -5,6 +5,7 @@
   "author": "Vedansh",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "homepage": "https://github.com/actions/ts-action-starter",
   "repository": {
     "type": "git",
@@ -22,14 +23,15 @@
     ".": "./dist/index.cjs"
   },
   "scripts": {
+    "setup": "npm i -g pnpm@9.0.0 && pnpm -v",
     "bundle": "npm run format:write && npm run package",
     "ci-test": "pnpx jest",
     "coverage": "pnpx make-coverage-badge --output-path ./badges/coverage.svg",
     "format:write": "pnpx prettier --write .",
     "format:check": "pnpx prettier --check .",
-    "auto-fix": "pnpx run format:write",
+    "auto-fix": "pnpx run format:check && pnpx run format:write",
     "lint": "pnpx eslint . -c ./.github/linters/eslint.config.js",
-    "package": "pnpx esbuild src/index.ts --bundle --outdir=dist --platform=node --sourcemap; mv /dist/index.js /dist/index.cjs",
+    "package": "pnpx esbuild src/index.ts --format=cjs --bundle --outfile=dist/index.cjs --platform=node --sourcemap && cp -f dist/index.cjs dist/index.js",
     "package:watch": "npm run package -- --watch",
     "test": "pnpx jest",
     "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"

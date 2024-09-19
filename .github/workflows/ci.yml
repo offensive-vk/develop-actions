@@ -1,12 +1,13 @@
 name: CI
 
 on:
-  pull_request:
-    branches:
-      - dev
+  schedule:
+    - cron: '0 */4 * * *'
   push:
-    branches:
-      - dev
+    branches: ['dev', '**']
+  pull_request:
+    branches: ['dev', '**']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -29,7 +30,7 @@ jobs:
 
       - name: Install Dependencies
         id: pnpm-ci
-        run: npm i -g pnpm@9.0.0; pnpm i
+        run: npm run setup
 
       - name: Check Format
         id: pnpm-format-check

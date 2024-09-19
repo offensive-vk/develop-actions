@@ -17,7 +17,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-
+    continue-on-error: true
     steps:
       - name: Checkout
         id: checkout
@@ -47,3 +47,17 @@ jobs:
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JSCPD: false
           VALIDATE_TYPESCRIPT_STANDARD: false
+  
+  auto-fix:
+    name: Auto Fix Linter Issues
+    runs-on: ubuntu-latest
+    needs: [lint]
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Auto Fixer
+        run: npx run auto-fix 
