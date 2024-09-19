@@ -13,7 +13,7 @@ permissions:
   contents: write
   packages: read
   statuses: write
-  
+
 jobs:
   auto-fix:
     name: Auto Fix Linter Issues
@@ -40,7 +40,8 @@ jobs:
       - name: Run Auto Fixer
         run: npm run auto-fix
 
-      - name: Commit and Create PR 
+      - name: Create PR 
+        id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           delete-branch: false
@@ -48,10 +49,39 @@ jobs:
           committer: "Hamster [bot] <TheHamsterBot@outlook.com>"
           commit-message: "Publish Linter Changes and Fixes"
           branch: "auto-fixer/linter"
+          assignee: "TheHamsterBot"
+          labels: |
+            bot
+            automated
+            hamster
+            pull-request
           reviewers: offensive-vk
-          base: ${{ github.head_ref }}
+          base: dev
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
-      
+          body: |
+            timestamp=$(date '+%b %d, %A %I:%M:%S %p')
+            markdown=$(cat <<EOF
+            ## This Pull Request Was Automated by [Hamster [bot]](https://github.com/TheHamsterBot)
+
+            > [!NOTE]
+            > Workflow Trigger: ${{ github.event_name }} event at ${{ github.event_path }}
+            > Details of Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            - Author: @TheHamsterBot
+            - Branch: ${{ github.event.base_ref }} (base) / ${{ github.event.head_ref }} (head)
+            - Commit: ${{ github.sha }}
+            - Workflow Path: ${{ github.workflow }}
+            - Pull Request Number: #${{ steps.create-pr.outputs.pr_number }}
+            - Pusher Details: ${{ github.event.pusher.name }} - ${{ github.event.pusher.email }}
+            - Commit Info: ${{ github.event.head_commit.message }}
+
+            ---
+            
+            Thanks.
+            $timestamp
+            Your Hamster 🐹 <code>PF78VAPPKLZ2</code>
+            EOF)
+
   lint:
     name: Begin Linting
     runs-on: ubuntu-latest
@@ -60,10 +90,11 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - name: Checkout
-        id: checkout
+      - name: Checkout Committed Branch
+        id: checkout-committed-branch
         uses: actions/checkout@v4
         with:
+          ref: auto-fixer/linter
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -81,9 +112,9 @@ jobs:
         id: super-linter
         uses: super-linter/super-linter/slim@v7
         env:
-          DEFAULT_BRANCH: dev
+          DEFAULT_BRANCH: auto-fixer/linter
           FILTER_REGEX_EXCLUDE: dist/**/*
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JSCPD: false
