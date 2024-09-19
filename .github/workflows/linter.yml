@@ -40,6 +40,15 @@ jobs:
       - name: Run Auto Fixer
         run: npm run auto-fix
 
+      - name: Commit and Push
+        uses: offensive-vk/auto-commit-push@v5
+        with:
+          name: "Hamster [bot]"
+          email: "TheHamsterBot@outlook.com"
+          message: "Publish Linter Changes and Fixes"
+          branch: ${{ github.head_ref }}
+          github-token: ${{ secrets.BOT_TOKEN }}
+      
   lint:
     name: Begin Linting
     runs-on: ubuntu-latest
