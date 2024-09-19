@@ -57,7 +57,6 @@ jobs:
     needs: [lint]
     strategy:
       fail-fast: true
-    continue-on-error: true
     steps:
       - name: Checkout
         id: checkout
