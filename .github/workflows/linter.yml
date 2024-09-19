@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint
+    name: Begin Linting
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
@@ -75,4 +75,4 @@ jobs:
         run: npx pnpm i
 
       - name: Run Auto Fixer
-        run: pnpm run auto-fix
+        run: npm run auto-fix

@@ -17,7 +17,10 @@
   "keywords": [
     "actions",
     "node",
-    "setup"
+    "setup",
+    "github",
+    "typescript",
+    "developer"
   ],
   "exports": {
     ".": "./dist/index.cjs"
@@ -26,12 +29,11 @@
     "setup": "npm i -g pnpm@9.0.0 && pnpm -v",
     "bundle": "pnpm run format:write && pnpm run package",
     "coverage": "pnpx make-coverage-badge --output-path ./badges/coverage.svg",
-    "format:write": "pnpm prettier --write .",
-    "format:check": "pnpm prettier --check .",
+    "format:write": "pnpx prettier --write .",
+    "format:check": "pnpx prettier --check .",
     "auto-fix": "pnpm run format:check && pnpm run format:write",
     "lint": "pnpx eslint . -c ./.github/linters/eslint.config.js",
     "package": "pnpx esbuild src/index.ts --format=cjs --bundle --outfile=dist/index.cjs --platform=node --sourcemap && cp -f dist/index.cjs dist/index.js",
-    "package:watch": "pnpm run package -- --watch",
     "test": "pnpx jest",
     "all": "pnpm run format:write && pnpm run lint && pnpm run test && pnpm run coverage && pnpm run package"
   },
