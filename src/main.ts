@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import { wait } from './wait.ts'
 
 /**
  * The main function for the action.

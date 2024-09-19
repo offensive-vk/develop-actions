@@ -1,23 +1,25 @@
 name: CI / Lint
 
 on:
-  pull_request:
-    branches:
-      - dev
+  schedule:
+    - cron: '0 */4 * * *'
   push:
-    branches:
-      - dev
+    branches: ['dev', '**']
+  pull_request:
+    branches: ['dev', '**']
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   packages: read
   statuses: write
 
 jobs:
-  lint:
-    name: Lint
+  auto-fix:
+    name: Auto Fix Linter Issues
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
     steps:
       - name: Checkout
         id: checkout
@@ -38,23 +40,22 @@ jobs:
       - name: Run Auto Fixer
         run: git config advice.mergeConflict false; npm run auto-fix
 
-      - name: Create PR
+      - name: Create PR 
         id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           delete-branch: false
-          title: 'Automated: Auto Fix Linter'
-          committer: 'Hamster [bot] <TheHamsterBot@outlook.com>'
-          commit-message: 'Publish Linter Changes and Fixes'
-          branch: 'auto-fixer/linter'
-          assignees: 'TheHamsterBot'
+          title: "Automated: Auto Fix Linter"
+          committer: "Hamster [bot] <TheHamsterBot@outlook.com>"
+          commit-message: "Publish Linter Changes and Fixes"
+          branch: "auto-fixer/linter"
+          assignees: "TheHamsterBot"
           labels: |
             bot
             automated
             hamster
-            pull-request
           reviewers: offensive-vk
-          base: dev
+          base: ${{ github.event.base_ref }}
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           body: |
             timestamp=$(date '+%b %d, %A %I:%M:%S %p')
@@ -74,12 +75,11 @@ jobs:
             - Commit Info: ${{ github.event.head_commit.message }}
 
             ---
-
+            
             Thanks.
             $timestamp
             Your Hamster 🐹 <code>PF78VAPPKLZ2</code>
             EOF)
-
   lint:
     name: Begin Linting
     runs-on: ubuntu-latest
@@ -88,7 +88,7 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - name: Checkout Committed Branch
+      - name: Checkout Branch
         id: checkout-committed-branch
         uses: actions/checkout@v4
         with:
@@ -104,15 +104,15 @@ jobs:
 
       - name: Install Dependencies
         id: install
-        run: npm ci
+        run: npx pnpm i
 
       - name: Lint Codebase
         id: super-linter
         uses: super-linter/super-linter/slim@v7
         env:
-          DEFAULT_BRANCH: dev
+          DEFAULT_BRANCH: auto-fixer/linter
           FILTER_REGEX_EXCLUDE: dist/**/*
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JSCPD: false
