@@ -55,7 +55,7 @@ jobs:
             automated
             hamster
           reviewers: offensive-vk
-          base: ${{ github.event.base_ref }}
+          base: fix-actions
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           body: |
             timestamp=$(date '+%b %d, %A %I:%M:%S %p')
