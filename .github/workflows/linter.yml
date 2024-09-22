@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 */4 * * *'
   push:
-    branches: ['dev']
+    branches: ['dev', '**']
   workflow_dispatch:
 
 permissions:
@@ -53,7 +53,7 @@ jobs:
             automated
             hamster
           reviewers: offensive-vk
-          base: fix-actions
+          base: dev
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           body: |
             ## This Pull Request Was Automated by [Hamster [bot]](https://github.com/TheHamsterBot)
@@ -86,7 +86,6 @@ jobs:
         id: checkout-base-branch
         uses: actions/checkout@v4
         with:
-          # Checkout the base branch, not the auto-fix branch
           ref: ${{ github.event.pull_request.base.ref }}
           fetch-depth: 0
 
@@ -99,13 +98,12 @@ jobs:
 
       - name: Install Dependencies
         id: install
-        run: npx pnpm i
+        run: npm run setup
 
       - name: Lint Codebase
         id: super-linter
         uses: super-linter/super-linter/slim@v7
         env:
-          DEFAULT_BRANCH: ${{ github.event.pull_request.base.ref }}
           FILTER_REGEX_EXCLUDE: dist/**/*
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           VALIDATE_ALL_CODEBASE: true

@@ -2,10 +2,6 @@ FROM node:20-slim
 
 SHELL ["/bin/bash", "-c"]
 
-RUN useradd -m node
-
-USER node
-
 RUN npm i -g pnpm@9.0.0
 
 WORKDIR /app
