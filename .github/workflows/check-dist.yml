@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   check-dist:
-    name: Check dist/
+    name: Check Distribution Directory
     runs-on: ubuntu-latest
 
     steps:
@@ -35,15 +35,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-          cache: npm
 
       - name: Install Dependencies
         id: install
-        run: npm ci
+        run: npm i -g pnpm@9.0.0; pnpm i
 
       - name: Build dist/ Directory
         id: build
-        run: npm run bundle
+        run: pnpm run bundle
 
       # This will fail the workflow if the `dist/` directory is different than
       # expected.

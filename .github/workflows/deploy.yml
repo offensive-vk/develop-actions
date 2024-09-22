@@ -5,14 +5,14 @@ on:
     tags:
       - '*'
   schedule:
-      - cron: '0 0 1 * *'
+    - cron: '0 0 1 * *'
   workflow_dispatch:
 
 env:
   USERNAME: ${{ github.repository_owner }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TOKEN: ${{ secrets.GITHUB_TOKEN || secrets.BOT_TOKEN }}
+  TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 permissions:
   contents: read

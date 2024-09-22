@@ -1,21 +1,23 @@
 name: CI
 
 on:
-  pull_request:
-    branches:
-      - dev
+  schedule:
+    - cron: '0 */4 * * *'
   push:
-    branches:
-      - dev
+    branches: ['dev', '**']
+  pull_request:
+    branches: ['dev', '**']
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   test-typescript:
-    name: TypeScript Tests
     runs-on: ubuntu-latest
-
+    name: Test TypeScript
+    strategy:
+      fail-fast: true
     steps:
       - name: Checkout
         id: checkout
@@ -29,25 +31,26 @@ jobs:
           cache: npm
 
       - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
+        id: pnpm-ci
+        run: npm run setup
 
       - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
+        id: pnpm-format-check
+        run: pnpm run format:check
 
       - name: Lint
-        id: npm-lint
-        run: npm run lint
+        id: pnpm-lint
+        run: pnpm run lint
 
       - name: Test
-        id: npm-ci-test
-        run: npm run ci-test
+        id: pnpm-test
+        run: pnpm run test
 
   test-action:
-    name: GitHub Actions Test
     runs-on: ubuntu-latest
-
+    name: Test Action
+    strategy:
+      fail-fast: true
     steps:
       - name: Checkout
         id: checkout
