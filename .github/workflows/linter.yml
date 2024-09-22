@@ -104,6 +104,7 @@ jobs:
         id: super-linter
         uses: super-linter/super-linter/slim@v7
         env:
+          DEFAULT_BRANCH: 'auto-fixer/linter'
           FILTER_REGEX_EXCLUDE: dist/**/*
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
