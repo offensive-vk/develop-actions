@@ -38,16 +38,16 @@ jobs:
       - name: Run Auto Fixer
         run: git config advice.mergeConflict false; npm run auto-fix
 
-      - name: Create PR 
+      - name: Create PR
         id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           delete-branch: true
-          title: "Automated: Auto Fix Linter"
-          committer: "Hamster [bot] <TheHamsterBot@outlook.com>"
-          commit-message: "Publish Linter Changes and Fixes"
-          branch: "auto-fixer/linter"
-          assignees: "TheHamsterBot"
+          title: 'Automated: Auto Fix Linter'
+          committer: 'Hamster [bot] <TheHamsterBot@outlook.com>'
+          commit-message: 'Publish Linter Changes and Fixes'
+          branch: 'auto-fixer/linter'
+          assignees: 'TheHamsterBot'
           labels: |
             bot
             automated
@@ -70,7 +70,7 @@ jobs:
             - Commit Info: ${{ github.event.head_commit.message }}
 
             ---
-            
+
             Thanks.
             Your Hamster 🐹 <code>PF78VAPPKLZ2</code>
 
