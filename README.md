@@ -1,9 +1,10 @@
 # Create a GitHub Action Using TypeScript
 
-[![GitHub Super-Linter](https://github.com/actions/typescript-action/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
-![CI](https://github.com/actions/typescript-action/actions/workflows/ci.yml/badge.svg)
-[![Check dist/](https://github.com/actions/typescript-action/actions/workflows/check-dist.yml/badge.svg)](https://github.com/actions/typescript-action/actions/workflows/check-dist.yml)
-[![CodeQL](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml)
+[![CI / Build & Test](https://github.com/offensive-vk/ts-action-starter/actions/workflows/bundle.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/bundle.yml)
+[![CI / Check Transpiled JavaScript](https://github.com/offensive-vk/ts-action-starter/actions/workflows/check-dist.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/check-dist.yml)
+[![CI / Deploy to DockerHub](https://github.com/offensive-vk/ts-action-starter/actions/workflows/docker.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/docker.yml)
+[![CI / Deploy to GHCR](https://github.com/offensive-vk/ts-action-starter/actions/workflows/deploy.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/deploy.yml)
+[![CI / Lint](https://github.com/offensive-vk/ts-action-starter/actions/workflows/linter.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/linter.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
 Use this template to bootstrap the creation of a TypeScript action. :rocket:

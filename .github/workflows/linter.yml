@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 */4 * * *'
   push:
-    branches: ['dev']
+    branches: ['dev', '**']
   workflow_dispatch:
 
 permissions:
@@ -38,22 +38,22 @@ jobs:
       - name: Run Auto Fixer
         run: git config advice.mergeConflict false; npm run auto-fix
 
-      - name: Create PR 
+      - name: Create PR
         id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           delete-branch: true
-          title: "Automated: Auto Fix Linter"
-          committer: "Hamster [bot] <TheHamsterBot@outlook.com>"
-          commit-message: "Publish Linter Changes and Fixes"
-          branch: "auto-fixer/linter"
-          assignees: "TheHamsterBot"
+          title: 'Automated: Auto Fix Linter'
+          committer: 'Hamster [bot] <TheHamsterBot@outlook.com>'
+          commit-message: 'Publish Linter Changes and Fixes'
+          branch: 'auto-fixer/linter'
+          assignees: 'TheHamsterBot'
           labels: |
             bot
             automated
             hamster
           reviewers: offensive-vk
-          base: fix-actions
+          base: dev
           token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           body: |
             ## This Pull Request Was Automated by [Hamster [bot]](https://github.com/TheHamsterBot)
@@ -70,7 +70,7 @@ jobs:
             - Commit Info: ${{ github.event.head_commit.message }}
 
             ---
-            
+
             Thanks.
             Your Hamster 🐹 <code>PF78VAPPKLZ2</code>
 
@@ -86,8 +86,7 @@ jobs:
         id: checkout-base-branch
         uses: actions/checkout@v4
         with:
-          # Checkout the base branch, not the auto-fix branch
-          ref: ${{ github.event.pull_request.base.ref }}
+          ref: 'auto-fixer/linter'
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -99,13 +98,13 @@ jobs:
 
       - name: Install Dependencies
         id: install
-        run: npx pnpm i
+        run: npm run setup
 
       - name: Lint Codebase
         id: super-linter
         uses: super-linter/super-linter/slim@v7
         env:
-          DEFAULT_BRANCH: ${{ github.event.pull_request.base.ref }}
+          DEFAULT_BRANCH: 'auto-fixer/linter'
           FILTER_REGEX_EXCLUDE: dist/**/*
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
