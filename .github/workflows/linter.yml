@@ -86,7 +86,7 @@ jobs:
         id: checkout-base-branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.ref }}
+          ref: 'auto-fixer/linter'
           fetch-depth: 0
 
       - name: Setup Node.js
