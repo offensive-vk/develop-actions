@@ -1,10 +1,11 @@
 # Create a GitHub Action Using TypeScript
 
-[![CI / Build & Test](https://github.com/offensive-vk/ts-action-starter/actions/workflows/bundle.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/bundle.yml)
-[![CI / Check Transpiled JavaScript](https://github.com/offensive-vk/ts-action-starter/actions/workflows/check-dist.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/check-dist.yml)
-[![CI / Deploy to DockerHub](https://github.com/offensive-vk/ts-action-starter/actions/workflows/docker.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/docker.yml)
-[![CI / Deploy to GHCR](https://github.com/offensive-vk/ts-action-starter/actions/workflows/deploy.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/deploy.yml)
-[![CI / Lint](https://github.com/offensive-vk/ts-action-starter/actions/workflows/linter.yml/badge.svg)](https://github.com/offensive-vk/ts-action-starter/actions/workflows/linter.yml)
+[![CI / Build & Test](https://github.com/offensive-vk/develop-actions/actions/workflows/bundle.yml/badge.svg)](https://github.com/offensive-vk/develop-actions/actions/workflows/bundle.yml)
+[![CI / Check Transpiled JavaScript](https://github.com/offensive-vk/develop-actions/actions/workflows/check-dist.yml/badge.svg)](https://github.com/offensive-vk/develop-actions/actions/workflows/check-dist.yml)
+[![CI / Deploy to DockerHub](https://github.com/offensive-vk/develop-actions/actions/workflows/docker.yml/badge.svg)](https://github.com/offensive-vk/develop-actions/actions/workflows/docker.yml)
+[![CI / Deploy to GHCR](https://github.com/offensive-vk/develop-actions/actions/workflows/deploy.yml/badge.svg)](https://github.com/offensive-vk/develop-actions/actions/workflows/deploy.yml)
+[![CI / Lint](https://github.com/offensive-vk/develop-actions/actions/workflows/linter.yml/badge.svg)](https://github.com/offensive-vk/develop-actions/actions/workflows/linter.yml)
+[![CI / CodeQL](https://github.com/offensive-vk/develop-actions/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/offensive-vk/develop-actions/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
 Use this template to bootstrap the creation of a TypeScript action. :rocket:
@@ -178,7 +179,7 @@ steps:
 ```
 
 For example workflow runs, check out the
-[Actions tab](https://github.com/actions/typescript-action/actions)! :rocket:
+[Actions tab](https://github.com/offensive-vk/develop-actions/actions)! :rocket:
 
 ## Usage
 
@@ -234,3 +235,13 @@ following steps:
    commits, tags and branches to the remote repository. From here, you will need
    to create a new release in GitHub so users can easily reference the new tags
    in their workflows.
+
+
+***
+
+<p align="center">
+  <i>&copy; <a href="https://github.com/offensive-vk/">Vedansh </a> 2023 - Present</i><br>
+  <i>Licensed under <a href="https://mit-license.org/">MIT</a></i><br>
+  <a href="https://github.com/TheHamsterBot"><img src="https://i.ibb.co/4KtpYxb/octocat-clean-mini.png" alt="hamster" /></a><br>
+  <sup>Thanks for visiting :)</sup>
+</p>

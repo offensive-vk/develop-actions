@@ -1,6 +1,6 @@
 {
-  "name": "ts-action-starter",
-  "description": "GitHub Actions TypeScript Template",
+  "name": "develop-actions",
+  "description": "Create GitHub Actions using TypeScript Template",
   "version": "5.0.0",
   "author": "Vedansh",
   "private": true,
