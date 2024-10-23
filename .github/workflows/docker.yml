@@ -2,7 +2,7 @@ name: CI / Deploy to DockerHub
 
 on:
   schedule:
-    - cron: '15 0 * * 0'
+    - cron: '0 0 * * 0'
   workflow_dispatch:
 
 env:
@@ -25,10 +25,15 @@ jobs:
       contents: read
       packages: write
       id-token: write
+
+    name: Publish
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
       - name: Install Cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da #v3.7.0
@@ -51,6 +56,13 @@ jobs:
         uses: docker/metadata-action@70b2cdc6480c1a8b86edf1777157f8f437de2166 # v5.0.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            latest
+            edge
+          labels: |
+            org.opencontainers.image.title=develop-actions
+            org.opencontainers.image.vendor=Vedansh
+            org.opencontainers.image.source=https://github.com/offensive-vk/develop-actions/
 
       - name: Build and Push Docker Image
         id: build-and-push
@@ -62,6 +74,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
 
       - name: Sign the Docker Image
         if: ${{ github.event_name != 'pull_request' }}
@@ -77,4 +90,4 @@ jobs:
           echo "Tags: ${{ steps.meta.outputs.tags }} " >> $GITHUB_STEP_SUMMARY
           echo "Labels: ${{ steps.meta.outputs.labels }} " >> $GITHUB_STEP_SUMMARY
           echo "Digest: ${{ steps.build-and-push.outputs.digest }} " >> $GITHUB_STEP_SUMMARY
-          echo "*** VERIFICATION COMPLETED ***" >> $GITHUB_STEP_SUMMARY
+          echo "*** VERIFICATION COMPLETED ***"
