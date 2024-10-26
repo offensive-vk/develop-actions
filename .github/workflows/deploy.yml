@@ -69,12 +69,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
 
       - name: Upload Labels and Tags
         if: ${{ github.event_name != 'pull_request' }}
         run: |
           echo "## Summary - Docker CI " >> $GITHUB_STEP_SUMMARY
-          echo "Tags: ${{ steps.meta.outputs.tags }} " >> $GITHUB_STEP_SUMMARY
-          echo "Labels: ${{ steps.meta.outputs.labels }} " >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.meta.outputs.tags }} " >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.meta.outputs.labels }} " >> $GITHUB_STEP_SUMMARY
           echo "*** VERIFICATION COMPLETED ***"
