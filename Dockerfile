@@ -23,5 +23,5 @@ HEALTHCHECK CMD curl https://qrenco.de/HEALTHCHECK || exit 1
 LABEL \
     "name"="TypeScript Action Starter" \
     "homepage"="https://github.com/marketplace/actions/typescript-action" \
-    "repository"="https://github.com/offensive-vk/ts-action-starter" \
+    "repository"="https://github.com/offensive-vk/develop-actions" \
     "maintainer"="TheHamsterBot <TheHamsterBot@users.noreply.github.com>"

@@ -1,12 +1,8 @@
 name: CI / Build & Test
 
 on:
-  schedule:
-    - cron: '0 */4 * * *'
   push:
-    branches: ['master', '**']
-  pull_request:
-    branches: ['master', '**']
+    branches: ['dev', '**']
   workflow_dispatch:
 
 concurrency:
