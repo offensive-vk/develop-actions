@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - dev
-  schedule:
-    - cron: '0 */4 * * *'
 
 permissions:
   actions: read
