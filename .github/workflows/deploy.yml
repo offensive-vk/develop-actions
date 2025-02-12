@@ -32,7 +32,7 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      
+
       - name: Install Cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da #v3.7.0
@@ -61,7 +61,7 @@ jobs:
             org.opencontainers.image.title=develop-actions
             org.opencontainers.image.vendor=Vedansh
             org.opencontainers.image.source=https://github.com/offensive-vk/develop-actions/
-            
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
