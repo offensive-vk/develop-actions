@@ -236,8 +236,7 @@ following steps:
    to create a new release in GitHub so users can easily reference the new tags
    in their workflows.
 
-
-***
+---
 
 <p align="center">
   <i>&copy; <a href="https://github.com/offensive-vk/">Vedansh </a> 2023 - Present</i><br>

@@ -2,7 +2,7 @@ FROM node:20-slim
 
 SHELL ["/bin/bash", "-c"]
 
-RUN npm i -g pnpm@9.0.0
+RUN npm i -g pnpm@10.0.0
 
 WORKDIR /app
 

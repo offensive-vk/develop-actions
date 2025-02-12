@@ -1,18 +1,17 @@
 {
   "name": "develop-actions",
   "description": "Create GitHub Actions using TypeScript Template",
-  "version": "5.0.0",
+  "version": "7.0.0",
   "author": "Vedansh",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@9.0.0",
-  "homepage": "https://github.com/actions/ts-action-starter",
+  "homepage": "https://github.com/actions/typescript-action",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/ts-action-starter.git"
+    "url": "git+https://github.com/actions/typescript-action.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/ts-action-starter/issues"
+    "url": "https://github.com/actions/typescript-action"
   },
   "keywords": [
     "actions",
@@ -26,7 +25,7 @@
     ".": "./dist/index.cjs"
   },
   "scripts": {
-    "setup": "npm i -g pnpm@9.0.0 && pnpm -v",
+    "setup": "npm i -g pnpm@10.0.0 && pnpm -v",
     "bundle": "pnpm run format:write && pnpm run package",
     "coverage": "pnpx make-coverage-badge --output-path ./badges/coverage.svg",
     "format:write": "pnpx prettier --write .",
