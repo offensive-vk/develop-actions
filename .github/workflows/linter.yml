@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -82,7 +82,7 @@ jobs:
     steps:
       - name: Checkout Base Branch
         id: checkout-base-branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: 'auto-fixer/linter'
           fetch-depth: 0
